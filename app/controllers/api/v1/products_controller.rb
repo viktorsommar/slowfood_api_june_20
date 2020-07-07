@@ -6,15 +6,9 @@ class Api::V1::ProductsController < ApplicationController
 
   def show
     product = Product.find(params[:id])
-    
   end
 
   def create
-  product = Product.create
-
+    product = Product.create
   end
-
-
-
-
 end

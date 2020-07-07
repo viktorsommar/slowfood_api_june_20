@@ -2,9 +2,8 @@ require 'rails_helper'
 
 
 RSpec.describe 'GET /v1/products', type: :request do
-   let!(:products) { create(:product) }
-  describe 'Get /v1/products' do
-   
+  describe 'successfully gets products' do
+    let!(:products) { 3.times{ create(:product) }}
     before do
       get '/api/v1/products'
     end
@@ -16,10 +15,18 @@ RSpec.describe 'GET /v1/products', type: :request do
     it'should return product' do
       json_response = JSON.parse(response.body)
 
-      expect(json_response['products'].count).to eq 1
+      expect(json_response['products'].count).to eq 3
     end
-
   end
 
-
+  describe 'no products have been added' do
+    before do
+      get '/api/v1/products'
+    end
+    
+    it 'should have no product on page' do
+      json_response = JSON.parse(response.body)
+      expect(json_response['products']).to eq []
+    end
+  end
 end
