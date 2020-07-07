@@ -2,7 +2,7 @@ require 'rails_helper'
 
 
 RSpec.describe 'GET /v1/products', type: :request do
-   let(:products) { create(:product) }
+   let!(:products) { create(:product) }
   describe 'Get /v1/products' do
    
     before do
