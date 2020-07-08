@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 RSpec.describe 'GET /v1/products', type: :request do
   describe 'successfully gets products' do
     let!(:products) { 3.times{ create(:product) }}
@@ -13,9 +12,7 @@ RSpec.describe 'GET /v1/products', type: :request do
     end
 
     it'should return product' do
-      json_response = JSON.parse(response.body)
-
-      expect(json_response['products'].count).to eq 3
+      expect(response_json['products'].count).to eq 3
     end
   end
 
@@ -25,8 +22,7 @@ RSpec.describe 'GET /v1/products', type: :request do
     end
     
     it 'should have no product on page' do
-      json_response = JSON.parse(response.body)
-      expect(json_response['products']).to eq []
+      expect(response_json['products']).to eq []
     end
   end
 end
