@@ -16,8 +16,7 @@ RSpec.describe 'GET /v1/products', type: :request do
     end
     
     it 'products should have categories' do
-      product = Product.last
-      expect(product.category).to eq 'maincourses'
+      expect(response_json['products'].first['category']).to eq "main_courses"
     end
   end
 
