@@ -1,1 +1,1 @@
-products = Product.create([{ name: 'Pokebowl', description: 'fresh', price: 150 }, { name: 'Burger', description: 'juicy', price: 125 }])
+products = Product.create([{ name: 'Pokebowl', description: 'fresh', price: 150, category: 'main_courses' }, { name: 'Burger', description: 'juicy', price: 125, category: 'main_courses' }, { name: 'Juice', description: 'sweet', price: 30, category: 'drinks' }])

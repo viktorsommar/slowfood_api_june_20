@@ -11,8 +11,12 @@ RSpec.describe 'GET /v1/products', type: :request do
       expect(response).to have_http_status 200
     end
 
-    it'should return product' do
+    it 'should return product' do
       expect(response_json['products'].count).to eq 3
+    end
+    
+    it 'products should have categories' do
+      expect(response_json['products'].first['category']).to eq "main_courses"
     end
   end
 
