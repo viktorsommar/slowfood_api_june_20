@@ -19,7 +19,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
-  gem 'capybara'
 end
 
 group :development do
