@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    get 'orders/create'
+    get 'v1/orders/create'
   end
   namespace :api do
     namespace :v1 do
