@@ -7,6 +7,8 @@ class Api::V1::OrdersController < ApplicationController
 
   def update
     order = Order.find(params[:id])
-    order.order_items.create(product:product)
-    render json: { message: 'The product has been added to your order'}
+    product = Product.find(params[:product_id])
+    order.order_items.create(product: product)
+    render json: { message: 'The product has been added to your order', order_id: order.id }
+  end
 end
