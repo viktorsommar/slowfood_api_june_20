@@ -20,5 +20,4 @@ RSpec.describe 'POST /api/v1/orders', type: :request do
       expect(response_json['order_id']).to eq Order.last.id
     end
   end
-end
-  
+end  
