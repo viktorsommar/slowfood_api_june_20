@@ -6,6 +6,7 @@ class Api::V1::OrdersController < ApplicationController
   end
 
   def update
+
     order = Order.find(params[:id])
     product = Product.find(params[:product_id])
     order.order_items.create(product: product)

@@ -1,5 +1,5 @@
 RSpec.describe 'PUT /api/v1/orders', type: :request do
-    let!(:pizza) { create(:product, name: 'Pokebowl', price: 50) }
+    let!(:pizza) { create(:product, name: 'Pizza', price: 50) }
     let!(:mushrooms) { create(:product, name: 'Swamp', price: 3) }
 
     let(:user) { create(:user) }
@@ -7,11 +7,11 @@ RSpec.describe 'PUT /api/v1/orders', type: :request do
     let(:user_headers) { { HTTP_ACCEPT: 'application/json'}.merge!(credentials) }
 
     let(:order) { create(:order, user: user) }
-    let(:order_item) { create(:order_item, product: pizza, order: order) }
+    let!(:order_item) { create(:order_item, product: pizza, order: order) }
 
   
     describe 'successfully' do
-        before do
+        before do 
         put "/api/v1/orders/#{order.id}",
         params: { product_id: mushrooms.id },
         headers: user_headers
