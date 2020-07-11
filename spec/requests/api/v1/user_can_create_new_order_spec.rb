@@ -17,7 +17,7 @@ RSpec.describe 'POST /api/v1/orders', type: :request do
       expect(response_json['message']).to eq 'The product has been added to your order'
     end
     it 'responds with order_id ' do 
-      expect(response_json['order_id']).to eq Order.last.id
+      expect(response_json['order']['id']).to eq Order.last.id
     end
     it "responds with the right amount of products currently in the order" do
       expect(response_json['order']['products'].count).to eq 1

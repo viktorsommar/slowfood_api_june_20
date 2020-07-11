@@ -6,12 +6,12 @@ class Api::V1::OrdersController < ApplicationController
   end
 
   def update
-
     order = current_user.orders.find(params[:id])
     product = Product.find(params[:product_id])
     order.order_items.create(product: product)
     render json: create_json_response(order)
   end
+
   private
   def create_json_response(order)
     json = { order: OrderSerializer.new(order) }
