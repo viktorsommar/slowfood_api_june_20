@@ -28,7 +28,7 @@ RSpec.describe 'PUT /api/v1/orders with finalized param', type: :request do
     end
 
     it 'set the order attribute "finalized" to be true' do
-        expect(order.finalized).to eq true
+        expect(order.reload.finalized).to eq true
     end
   end
 end
