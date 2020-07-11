@@ -1,5 +1,5 @@
 RSpec.describe 'POST /api/v1/orders', type: :request do
-  let!(:product) { create(:product, name: 'Pokebowl') }
+  let!(:product) { create(:product, name: 'Pokebowl', price: 30) }
   let(:user) { create(:user) }
   let(:credentials) { user.create_new_auth_token }
   let(:user_headers) { { HTTP_ACCEPT: 'application/json'}.merge!(credentials) }
@@ -18,6 +18,12 @@ RSpec.describe 'POST /api/v1/orders', type: :request do
     end
     it 'responds with order_id ' do 
       expect(response_json['order_id']).to eq Order.last.id
+    end
+    it "responds with the right amount of products currently in the order" do
+      expect(response_json['order']['products'].count).to eq 1
+    end
+    it "responds with current order total" do
+      expect(response_json['order']['total']).to eq 30
     end
   end
 end  
