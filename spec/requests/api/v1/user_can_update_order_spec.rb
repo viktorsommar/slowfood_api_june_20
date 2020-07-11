@@ -1,5 +1,6 @@
 RSpec.describe 'PUT /api/v1/orders', type: :request do
     let!(:pizza) { create(:product, name: 'Pizza', price: 50) }
+    let!(:falafel) { create(:product, name: 'Falafel', price: 60) }
     let!(:mushrooms) { create(:product, name: 'Swamp', price: 3) }
 
     let(:user) { create(:user) }
@@ -7,15 +8,15 @@ RSpec.describe 'PUT /api/v1/orders', type: :request do
     let(:user_headers) { { HTTP_ACCEPT: 'application/json'}.merge!(credentials) }
 
     let(:order) { create(:order, user: user) }
-    let!(:order_item) { create(:order_item, product: pizza, order: order) }
+    let!(:order_item) { 3.times{create(:order_item, product: pizza, order: order) } }
+    let!(:more_order_item) { 5.times{create(:order_item, product: falafel, order: order) } }
 
-  
     describe 'successfully' do
-        before do 
+      before do 
         put "/api/v1/orders/#{order.id}",
         params: { product_id: mushrooms.id },
         headers: user_headers
-       end
+      end
 
       it 'responds with 200 status' do
         expect(response.status).to eq 200
@@ -26,11 +27,15 @@ RSpec.describe 'PUT /api/v1/orders', type: :request do
       end
 
       it 'responds with order_id ' do 
-        expect(response_json['order_id']).to eq Order.last.id
+        expect(response_json['order']['id']).to eq order.id
       end
 
-      it 'adds another product to the order' do
-        expect(order.order_items.count).to eq 2
+      it "responds with the right amount of products currently in the order" do
+        expect(response_json['order']['products'].count).to eq 3
       end
-    end
+    
+      it "responds with current order total" do
+        expect(response_json['order']['total']).to eq 453
+      end
+  end
 end
