@@ -29,8 +29,13 @@ RSpec.describe 'PUT /api/v1/orders', type: :request do
         expect(response_json['order_id']).to eq Order.last.id
       end
 
-      it 'adds another product to the order' do
-        expect(order.order_items.count).to eq 2
+      it "responds with the right amount of products currently in the order" do
+        expect(response_json['order']['products'].count).to eq 2
       end
-    end
+    
+      it "responds with current order total" do
+        expect(response_json['order']['total']).to eq 53
+      end
+  
+  end
 end
