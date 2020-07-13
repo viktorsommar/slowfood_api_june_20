@@ -1,12 +1,12 @@
 class Api::V1::OrdersController < ApplicationController
   def create
-    order = Order.create(user: current_user)
+    order = Order.create
     order.order_items.create(product_id: params[:product_id])
     render json: create_json_response(order)
   end
 
   def update
-    order = current_user.orders.find(params[:id])
+    order = Order.find(params[:id])
     
     if params[:activity] 
      order.update_attribute(:finalized, true)

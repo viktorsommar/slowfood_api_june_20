@@ -1,5 +1,6 @@
 class OrderSerializer < ActiveModel::Serializer
-  attributes :id, :total, :products
+  attributes :id, :total, :products, :finalized
+
   def products
     object.order_items.group_by(&:product_id).map do |key, value|
       product = value.first.product
